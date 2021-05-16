@@ -79,3 +79,15 @@ You can follow the [Biance volatility bot guide](https://www.cryptomaton.org/202
 1. Read the [FAQ](FAQ.md)
 2. Open an issue / check us out on `#troubleshooting` at [Discord](https://discord.gg/buD27Dmvu3) 🚀 
     - Do not spam, do not berate, we are all humans like you, this is an open source project, not a full time job. 
+
+## Telegram
+
+1. Create a telegram bot [click here](https://core.telegram.org/bots#3-how-do-i-create-a-bot)
+2. Get your telegram chat_id [@userinfobot](https://t.me/userinfobot)
+3. Install telegram bot api dependency
+    ```sh
+        $ pip install pyTelegramBotAPI
+    ```
+4. open helpers/telegram.py and add your API KEY and CHAT ID
+5. When you start your bot it should send you a message in your telegram
+

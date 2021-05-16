@@ -29,6 +29,9 @@ from helpers.handle_creds import (
     load_correct_creds
 )
 
+from helpers.telegram import (
+    send_telegram
+)
 
 # for colourful logging to the console
 class txcolors:
@@ -243,6 +246,7 @@ def buy():
                     # Log trade
                     if LOG_TRADES:
                         write_log(f"Buy : {volume[coin]} {coin} - {last_price[coin]['price']}")
+                        send_telegram(f"Buy : {volume[coin]} {coin} - {last_price[coin]['price']}")
 
 
         else:
@@ -307,6 +311,7 @@ def sell_coins():
                 if LOG_TRADES:
                     profit = (LastPrice - BuyPrice) * coins_sold[coin]['volume']
                     write_log(f"Sell: {coins_sold[coin]['volume']} {coin} - {BuyPrice} - {LastPrice} Profit: {profit:.2f} {PriceChange:.2f}%")
+                    send_telegram(f"Sell: {coins_sold[coin]['volume']} {coin} - {BuyPrice} - {LastPrice} Profit: {profit:.2f} {PriceChange:.2f}%")
                     session_profit=session_profit + PriceChange
             continue
 
@@ -433,9 +438,11 @@ if __name__ == '__main__':
                 coins_bought = json.load(file)
 
     print('Press Ctrl-Q to stop the script')
+    send_telegram("Binance Volatility Bot started")
 
     if not TEST_MODE:
         print('WARNING: You are using the Mainnet and live funds. Waiting 30 seconds as a security measure')
+        send_telegram('WARNING: You are using the Mainnet and live funds. Waiting 30 seconds as a security measure')
         time.sleep(30)
 
     # seed initial prices
